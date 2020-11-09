@@ -8,8 +8,8 @@ on:
   #   branches:
   #     - main
   schedule:
-    # https://crontab.guru/examples.html
-    - cron: "0 18 * * MON"
+    # https://crontab.guru/examples.html  每个星期一的19点执行
+    - cron: "0 20 * * MON"
 
 jobs:
   bot:
