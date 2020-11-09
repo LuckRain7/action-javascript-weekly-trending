@@ -30,7 +30,8 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run build
+          npm run js
+          npm run ts
 
       # 第四步 提交
       - name: commit
