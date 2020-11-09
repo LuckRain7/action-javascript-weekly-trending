@@ -7,6 +7,8 @@ const superagent = require("superagent");
 const cheerio = require("cheerio");
 const fs = require("fs");
 const getWeek = require("./utils/getWeek.js");
+
+const path = require("path");
 const ThisWeekInYear = getWeek() - 1;
 const Year = new Date();
 
@@ -99,7 +101,10 @@ ${description}
 
   // 写入文件
   fs.writeFile(
-    `../github-javascript-weekly/${Year.getFullYear()}-${ThisWeekInYear}.md`,
+    path.resolve(
+      __dirname,
+      `../github-javascript-weekly/${Year.getFullYear()}-${ThisWeekInYear}.md`
+    ),
     MarkDownFile,
     (err) => {
       if (!err) {
