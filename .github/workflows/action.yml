@@ -3,13 +3,14 @@ name: "GitHub Weekly Trending Bot"
 
 # on字段是触发条件
 on:
+  schedule:
+    # https://crontab.guru/examples.html  每个星期一的19点执行
+    - cron: '0 20 * * MON'
   # 在推送到master分支时会自动运行一次
   # push:
   #   branches:
   #     - main
-  schedule:
-    # https://crontab.guru/examples.html  每个星期一的19点执行
-    - cron: "0 20 * * MON"
+
 
 jobs:
   bot:
