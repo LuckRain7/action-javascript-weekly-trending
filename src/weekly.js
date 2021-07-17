@@ -1,7 +1,7 @@
 /*
  * @Author       : 震雨 LuckRain7
  * @Date         : 2021-03-01 21:13:25
- * @LastEditTime : 2021-03-01 21:21:33
+ * @LastEditTime : 2021-07-17 17:18:31
  * @Description  :
  * @   Love and Peace
  */
@@ -25,7 +25,7 @@ const FilePath = (type) => path.resolve(__dirname, `../DATA/weekly-${type}`);
 (async () => {
   // 开启浏览器
   const browser = await puppeteer.launch({
-    headless: false, // 有浏览器界面启动
+    // headless: false, // 有浏览器界面启动
     slowMo: 50, // 将 Puppeteer 操作减少指定的毫秒数。
     // devtools: false, // 是否为每个选项卡自动打开DevTools面板
   });
@@ -43,7 +43,7 @@ const FilePath = (type) => path.resolve(__dirname, `../DATA/weekly-${type}`);
     );
 
     // 项目简介
-    let IntroduceArr = await page.$$eval("p.text-gray", (el) =>
+    let IntroduceArr = await page.$$eval("p.color-text-secondary", (el) =>
       el.map((el) => el.innerText)
     );
 
@@ -52,16 +52,17 @@ const FilePath = (type) => path.resolve(__dirname, `../DATA/weekly-${type}`);
     let TodayStartArr = []; // 项目 today start
 
     // 其余信息集合
-    let OtherInformation = await page.$$eval("div.text-gray", (el) =>
+    let OtherInformation = await page.$$eval("div.color-text-secondary", (el) =>
       el.map((el) => el.innerText)
     );
 
     OtherInformation.map((item) => {
-      const _item = item.split(" ");
+      let _item = item.split(" ")
+      _item = _item.filter((e) => e.length > 0)
 
-      StartArr.push(_item[3]);
-      ForkArr.push(_item[5]);
-      TodayStartArr.push(_item[_item.length - 3]);
+      StartArr.push(_item[1])
+      ForkArr.push(_item[2])
+      TodayStartArr.push(_item[_item.length - 3])
     });
 
     for (let i = 0; i < TitleArr.length; i++) {
